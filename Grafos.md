@@ -51,7 +51,7 @@ Conectividad
 
 **Ejemplo**
 
-![image-20200618134909391](upload/image-20200618134909391.png)
+![Ejemplo de grafos](https://i.loli.net/2020/07/28/cPSw3jRGH26trxy.png)
 
 En la imagen anterior, podemos decir que
 
@@ -63,11 +63,11 @@ En la imagen anterior, podemos decir que
 
 ## Grafo dirigido o digrafo
 
-Un grafo dirigido o digrafo o grafo orientado consiste en una dupla formada por un conjunto V de vértices o nodos del grafo, y un conjunto de pares ordenados A (aristas orientadas) pertenecientes a V xV . La relación establecida entre los vértices en un digrafo es antisimétrica.
+Un grafo dirigido o digrafo consiste en una dupla formada por un conjunto V de vértices, y un conjunto de pares ordenados A (aristas orientadas) pertenecientes a VxV . 
 
 En símbolos el grafo dirigido G es G = (V ; A) donde A es un subconjunto de V xV (aristas orientadas o dirigidas).
 
-<img src="upload/image-20200618152733591.png" alt="image-20200618152733591" style="zoom: 150%;" />
+![Grafos Dirigido](https://i.loli.net/2020/07/28/BqQjVZfv4gntFkW.png)
 
 ## Grafo no dirigido
 
@@ -75,17 +75,40 @@ Un grafo no dirigido (o no orientado) es una dupla formada por un conjunto V de 
 
 En símbolos el grafo dirigido G es G = (V ; A) donde A es un conjunto de pares no ordenados de V xV (Aristas no orientadas o no dirigidas). Esto significa que si hay un camino o modo de llegar desde F hasta G, también lo habrá de G a F .
 
-<img src="upload/image-20200618152704015.png" alt="image-20200618152704015" style="zoom:150%;"/>
+![Grafo no dirigido](https://i.loli.net/2020/07/28/YZQ5frhCkJMnsmd.png)
 
+## Estructuras para la implementación
 
+### Lista de adyacencias
+
+Se representa el grafo como una lista de listas, en donde cada vértice tiene una lista de vértices vecinos. Para el grafo:
+
+![Grafo)](https://i.loli.net/2020/07/28/9f5SQLj4bF2Irnu.png)
+
+La lista de adyacencias es
+
+![Grafo lista de adyacencias](https://i.loli.net/2020/07/28/8pOkvmyT7JQsGqW.png)
+
+### Matriz de adyacencias
+
+Se representa el grafo con una matriz que verifica lo siguiente: *si M[ i ] [ j ]  =  true, entonces la arista (i , j) pertenece al grafo*. Para el grafo:
+
+![Grafo)](https://i.loli.net/2020/07/28/9f5SQLj4bF2Irnu.png)
+
+La matriz de adyacencias es
+
+![Grafo matriz de adyacencias](https://i.loli.net/2020/07/28/xdAiUvf9LrhnjEg.png)
 
 ## Recorridos
 
-### En profundidad
+### En profundidad - DFS
 
-Depth first search o “busqueda en profundidad” consiste en para cada vértice del grafo que no ha sido visitado previamente visitarlo y luego pasar al primer adyacente no visitado, luego al primer adyacente del adyacente que no haya sido visitado, y así hasta llegar a un nodo que no tenga adyacentes no visitados. Entonces se retrocede para pasar al siguiente adyacente del anterior vértice y realizar el mismo proceso hasta agotar los adyacentes no visitados. El retroceso se hace cuando los vértices se agotan. Para implementar el algoritmo suele usarse una **pila** o bien un **algoritmo recursivo**.
+Depth first search o “busqueda primero en profundidad” consiste en para cada vértice del grafo que no ha sido visitado previamente, visitarlo y luego pasar al primer adyacente no visitado, luego al primer adyacente del adyacente que no haya sido visitado, y así hasta llegar a un nodo que no tenga adyacentes no visitados. Entonces se retrocede para pasar al siguiente adyacente del anterior vértice y realizar el mismo proceso hasta agotar los adyacentes no visitados. El retroceso se hace cuando los vértices se agotan. Para implementar el algoritmo suele usarse una **pila** o un **algoritmo recursivo**.
 
-El coste temporal
+![Grafos DFS](https://i.loli.net/2020/07/28/semqETuogZRblIp.png)
 
-### En anchura
+### En anchura - BFS
 
+Breadth first search o "búsqueda primero en anchura" consiste visitar todos los nodos por niveles. Por cada nodo no visitado, se lo visita (nivel 0) y marca, y luego se visita a sus nodos adyacentes (nivel 1). Por cada nodo adyacente luego se visita a los adyacentes de los mismos(nivel 3), y así sucesivamente hasta visitar a todos los nodos. Para implementar el algoritmo suele usarse una **cola** o un **algoritmo recursivo**.
+
+![Grafos BFS](https://i.loli.net/2020/07/28/3iHSvBK9xsf5j7o.png)
