@@ -64,11 +64,11 @@ Algunos conceptos que es necesario entender antes de seguir:
 
 ## Arbol binario
 
-Esta estructura se caracteriza por que cada nodo solo puede tener máximo 2 hijo, dicho de otra manera es un Árbol n-ario de Grado 2.
+Esta estructura se caracteriza por que cada nodo solo puede tener como máximo 2 hijos.
 
 ![Arbol binario](https://i.loli.net/2020/06/05/mJFoBqfs3bkNKpX.png)
 
-Se dice que el árbol binario está lleno cuando todos los nodos tienen cero o 2 hijos (con excepción de la raíz)
+Se dice que el árbol binario está lleno cuando todos los nodos tienen 0 o 2 hijos (con excepción de la raíz)
 
 ![Arbol binario lleno y no lleno](https://i.loli.net/2020/06/05/R2GbNrkQuW14Sz7.png)
 
@@ -145,13 +145,11 @@ Para implementarlo se necesita una estructura auxiliar de tipo cola. Primero se 
 
 ## Arbol Binario de Búsqueda (ABB)
 
-La característica que diferencia a los ABB de otro tipo de árboles es que siempre los elementos del subárbol izquierdo
+La característica que diferencia a los ABB de otro tipo de árboles es que siempre los elementos del subárbol izquierdo son menores que la raíz, y los del subárbol derecho mayores.
 
 ### Nodo
 
 ```c++
-// BSTNode.h
-
 template <typename Type>
 class BSTNode {
 
@@ -264,11 +262,9 @@ bool BSTNode<Type>:: onlyRightChildren() {
 
 ```
 
-### Árbol binario de búsqueda (ABB o BST)
+### Árbol
 
 ```c++
-// BST.h
-
 #include "BSTNode.h"
 using namespace std;
 
@@ -496,15 +492,10 @@ BSTNode<Type>* BST<Type>:: insert(BSTNode<Type>* treeNode, Type key) {
 ////////////////////////////////////////////////
 template<typename Type>
 int BST<Type>:: getHeight(BSTNode<Type>* treeNode) {
-    if (!treeNode)
+    if (treeNode)
+        return 1 + max(getHeight(treeNode->getLeft()), getHeight(treeNode->getRight()));
+    else
         return 0;
-    return 1 + max(getHeight(treeNode->getLeft()), getHeight(treeNode->getRight()));
-}
-
-////////////////////////////////////////////////
-template <typename Type>
-void BST<Type>:: balance(BSTNode<Type> *treeNode) {
-    // TODO
 }
 
 ////////////////////////////////////////////////
@@ -587,11 +578,11 @@ BSTNode<Type>* BST<Type>:: deleteKey(BSTNode<Type>* treeNode, Type key) {
 ////////////////////////////////////////////////
 template <typename Type>
 void BST<Type>:: deleteAll(BSTNode<Type>* treeNode) {
-    if(treeNode == NULL)
-        return;
-    deleteAll(treeNode->getLeft());
-    deleteAll(treeNode->getRight());
-    delete treeNode;
+    if(treeNode != NULL) {
+        deleteAll(treeNode->getLeft());
+        deleteAll(treeNode->getRight());
+        delete treeNode;
+    }
 }
 
 ////////////////////////////////////////////////
@@ -650,31 +641,32 @@ Type BST<Type>:: predecessor(BSTNode<Type>* treeNode) {
 ////////////////////////////////////////////////
 template<typename Type>
 void BST<Type>:: inOrder(BSTNode<Type>* treeNode) {
-    if (!treeNode)
-        return;
-    inOrder(treeNode->getLeft());
-    cout << treeNode->getKey() << " " ;
-    inOrder(treeNode->getRight());
+    if (treeNode) {
+        inOrder(treeNode->getLeft());
+        cout << treeNode->getKey() << " " ;
+        inOrder(treeNode->getRight());
+    }    
 }
 
 /////////////////////////////////////////////////////////////////////////////////////////
 template<typename Type>
 void BST<Type>:: preOrder(BSTNode<Type>* treeNode) {
-    if (!treeNode)
-        return;
-    cout << treeNode->getKey() << " ";
-    preOrder(treeNode->getLeft());
-    preOrder(treeNode->getRight());
+    if (treeNode) {
+        cout << treeNode->getKey() << " ";
+        preOrder(treeNode->getLeft());
+        preOrder(treeNode->getRight());
+    }
 }
 
 /////////////////////////////////////////////////////////////////////////////////////////
 template<typename Type>
 void BST<Type>:: postOrder(BSTNode<Type>* treeNode) {
-    if (!treeNode)
-        return;
-    postOrder(treeNode->getLeft());
-    postOrder(treeNode->getRight());
-    cout << treeNode->getKey() << " ";
+    if (treeNode) {
+        postOrder(treeNode->getLeft());
+        postOrder(treeNode->getRight());
+        cout << treeNode->getKey() << " ";
+    }
+
 }
 
 /* ------------------------------------------------------------------------------ */
@@ -742,7 +734,7 @@ Seguimos analizando el camino de inserción, y vemos que el resto del árbol est
 
 ### Eliminar
 
-Para eliminar, hay que hacer lo mismo que para insertar. Una vez que llegamos al nodo a eliminar, nos fijamos cual es el camino, y luego de eliminarlo verificamos recorriendo ese camino si quedó o no balanceado, realizando las operaciones necesarias en el caso de tener que balancear.
+Para eliminar hay que hacer lo mismo que para insertar. Una vez que llegamos al nodo a eliminar, nos fijamos cual es el camino, y luego de eliminarlo verificamos recorriendo ese camino si quedó o no balanceado, realizando las operaciones necesarias en el caso de tener que balancear.
 
 **Ejemplo:** quiero cargar en un ABB los siguientes números: 10, 20, 30, 25, 40, 50 y 60.
 
@@ -757,6 +749,74 @@ Para eliminar, hay que hacer lo mismo que para insertar. Una vez que llegamos al
 
 
 ## HEAP
+
+Un heap es un caso específico de los árboles binarios que cumple las siguientes propiedades:
+
+1. El valor de cada nodo es mayor (en el caso de un heap máximo, si es un heap mínimo sería menor) al de sus hijos
+2. El árbol está balanceado
+3. El árbol está completo, y si no lo está los hijos están a la izquierda
+
+Podemos decir que estos árboles están *parcialmente ordenados* por la propiedad 1, donde todos los nodos hijos son mayores (o menores) que el padre pero no hay ninguna restricción u orden entre los hijos.
+
+![Heap](https://i.loli.net/2020/09/01/XwOhUWPJx4DbdyG.png)
+
+En general los heaps se implementan con un array, donde se guardan los valores por niveles (como si fuera un recorrido en ancho).
+
+![array del heap](https://i.loli.net/2020/09/01/TB3MgcQWudpZ1If.png)
+
+Podemos ver que la posicion 0 es la raiz, la 1 el hijo izquierdo y la 2 el hijo derecho. Generalizando podemos decir que si el padre está en la posicion *p* => el hijo izq. está en *2 p + 1* y el der. en  *2p + 1*
+
+### Sacar raíz
+
+1. Se saca la raiz y reemplazandola por la última hoja
+2. Se restaura el heap: se compara el valor de la nueva raíz con el de su hijo menor, y de ser necesario se realiza el intercambio. Luego se sigue comparando hacia abajo el valor trasladado desde la raíz hasta las hojas o hasta ubicar el dato en la posicion definitiva.
+
+Gráficamente:
+
+![image-20200831160148338](https://i.loli.net/2020/09/01/RY7up2nrTiKwsoX.png)
+
+
+
+
+
+<img src="https://i.loli.net/2020/09/01/GsirC7lY2kLItE6.png" alt="image-20200831160216191" style="zoom:150%;" />
+
+Ahora tenemos que ver el menor hijo del subárbol gris, que es el 8, por lo que se intercambia el 29 con él:
+
+<img src="https://i.loli.net/2020/09/01/ZDOuAJzPI53ndHc.png" alt="image-20200831160716447" style="zoom:150%;" />
+
+Nuevamente nos fijamos el menor hijo del subárbol gris, en este caso es el 11, así que se intercambia el 29 con él:
+
+<img src="https://i.loli.net/2020/09/01/OL6kPtR2vzqZces.png" alt="image-20200831160850492" style="zoom:150%;" />
+
+Ahora sí el heap está restaurado.
+
+El costo es de O(log 2 n)
+
+### Agregar
+
+El nuevo elemento siempre se inserta como la última hoja, y luego se restaura el heap analizando hacia arriba hasta ubicar el nuevo elemento en donde corresponda. Supongamos que al heap anterior quiero agregarle un 9
+
+1. Queda como el hijo a la izquierda del 12 (en el mismo nivel que 30 y 27)
+2. Analizamos el 9 con respecto a su padre, 12. En este caso 9 es menor así que se intercambian.
+3. Analizamos el 9 con respecto a su nuevo padre, 10. Vuelve a ser menor 9 asi que volvemos a intercambiar los valores.
+4. Analizamos el 9 con respecto a su nuevo padre, 8. Como se verifica la condicion del heap (los hijos son mayores al padre) no se realiza ningún intercambio y podemos decir que se restauró el heap
+
+Situación inicial:
+
+<img src="https://i.loli.net/2020/09/01/MlzSyFnr2eZDaQh.png" alt="image-20200831161632506" style="zoom:150%;" />
+
+Se intercambia el 9 con el 12 y se analiza el 9 con el 10
+
+<img src="https://i.loli.net/2020/09/01/QVrpkR69xfbJZMW.png" alt="image-20200831161523231" style="zoom:150%;" />
+
+Se intercambia el 9 con el 10 y se analiza el 9 con el 8
+
+<img src="https://i.loli.net/2020/09/01/qmg1Ck5py2dnboD.png" alt="image-20200831161552105" style="zoom:150%;" />
+
+Ahora sí el heap está restaurado.
+
+El costo es de O(log 2 n)
 
 ## Multivia
 
