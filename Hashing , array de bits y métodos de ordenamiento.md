@@ -292,9 +292,11 @@ Hay que tener en cuenta que si las claves no son números enteros hay que conver
 
 ​		"ab" =  97 x 128 + 98 x 128 = 12416 + 12544 = 24960
 
-## División
+## Funciones
 
-Se divide la clave *k* por la cantidad de posiciones de la tabla *t* y se toma el *resto* entonces
+### División / Módulo
+
+Es una de las funciones de dispersión más simple: se divide la clave *k* por la cantidad de posiciones de la tabla *t* y se toma el *resto* entonces
 
 ​		*p = h(k) = k % t*
 
@@ -309,9 +311,9 @@ Se recomienda que el valor de *t* sea un número primo.
 5. Ingreso la clave 28413 en la posicion *p = 28413 % 6257 = **3385***
 6. Ingreso la clave 44694 en la posicion *p = 113521 % 44694 = **895*** => se produce una colisión. Veremos como solucionar esto más adelante
 
-## Multiplicación
+### Folding / Multiplicación
 
-Se multiplica a la clave *k* por un valor *A* tal que *0 < A < 1*, se toma la parte fraccionaria del resultado y se la multiplica por *t* (el tamaño de la tabla). El resultado se redondea y obtenemos la posiciín final
+Se multiplica a la clave *k* por un valor *A* tal que *0 < A < 1*, se toma la parte fraccionaria del resultado y se la multiplica por *t* (el tamaño de la tabla). El resultado se redondea y obtenemos la posición final
 
 ​		*p = h(k) = t · ((k · A) mod 1)*
 
@@ -321,15 +323,78 @@ Logra mejor dispersión que la división
 
 1. El número de CUIT 23-31562313-7 podemos dividirlo en 4 partes tomando de a 3 dígitos: 233 - 156 - 231 – 37
 2. Sumamos los valores: 233 + 156 + 231 + 37 = **657**
-3. Si el tamaño de la tabla es menor, se aplica la función módulo. Y en el caso de claves de tipo string se puede hacer un corte obteniendo strings más pequeños para realizar un *xor* entre ellos.
+3. Si el tamaño de la tabla es menor, se aplica la función división
 
-## Folding
+### Mid-square
 
-## Mid-square
+Se eleva a la clave *k* al cuadrado y se toman los dígitos centrales
 
-## Extraction
+**Ejemplo:**
 
-## Radix Transformation
+1. La clave es 1536 => 1536² = 2359296 
+2. Nos quedamos con los dígitos centrales: **592**
+3. Si el tamaño de la tabla es menor, se aplica la función división
+
+### Extraction
+
+Se extrae una parte de la clave. Hay que ser cuidadosos con los dígitos a extraer porque si son por ejemplo números de CUIT/CUIL y se toman los primeros 4 los valores siempre empiezan con 20, 23, 24 y 27 y pueden producirse muchas colisiones.
+
+### Radix Transformation
+
+Se cambia la base de la clave 
+
+**Ejemplo:**
+
+1. La clave es 425 y se va a hacer el cambio a base 16
+2. La nueva clave es *k' = 4 · 16 2 + 2 · 16 + 5 = **1061***
+3. Si el tamaño de la tabla es menor, se aplica la función división
 
 ## Colisiones
 
+Las colisiones se producen cuando más de una clave devuelven el mismo valor luego de aplicar alguna función de hash, a continuación vamos a ver varios métodos para manejar estas colisiones.
+
+### Open addresing
+
+Los métodos de direccionamiento abierto u open addresing guardan toda la informacion en la misma tabla y si se produce una colisión se busca una nueva posición tomando alguna nueva función. Entonces si *h(k)* está ocupada prueba con *h(k) + p(1)*, luego con *h(k) + p(2) , *h(k) + p(3)*, etc. donde *p* es la nueva función. Al finalizar siempre se aplica la función división.
+
+#### Linear probing
+
+Esta es la decisión más simple, donde *p(i) = i* entonces si *h(k) = 142* está ocupada intenta con 143, 144, 145, etc. Si al llegar al final no se encontró ninguna posicion libre, vuelve a empezar desde el principio. 
+
+El problema con esto es que agrupa claves en ciertas zonas de la tabla.
+
+#### Quiadratic probing
+
+Una mejora del linear probing es tomar *p(i) = i²*. Volviendo al ejemplo de antes si *h(k) = 142* está ocupada intenta con 142 + 1² = **143**, 142 + 2² = **146**, 142 + 3² = **151**, etc. De esta forma las claves quedan mas dispersas.
+
+#### Double hashing
+
+Es la mejor solución para el open addresing, se utilizan dos funciones de hash distintas en donde la secuencia para encontrar una posición vacía es *p = h(k) + i · h2 (k)*
+
+### Chaining
+
+El encadenamiento o chaining contempla que las claves estén en distintas tablas, por lo que cada posicion de la tabla en realidad es un puntero a una lista enlazada con las claves. Por ejemplo:
+
+- A, E y F devuelven el valor 1
+- T y B devuelven el valor 3
+- H devuelve el valor 4
+
+![chaining](https://i.loli.net/2020/09/01/YMVWIQp5rezPsC1.png)
+
+### Bucket addresing
+
+El direccionamiento de cubos o bucket addresing guarda los datos en una misma tabla, pero en cada posicion tiene varias posiciones en vez de una sola. Esto puede hacerse con una matriz, si se mantienen las claves del ejemplo anterior quedaría:
+
+![bucket-addresing](https://i.loli.net/2020/09/01/9HTgCx8LXJMtkOd.png)
+
+## Borrar un elemento
+
+Para eliminar un elemento primero hay que realizar una búsqueda, que va a depender de la forma en la que se resolvieron las colisiones. Si quiero borrar la clave *k* pero en *h(k)* hay otro elemento es que hubo una colision, y *k* ahora está en otro lugar. Para saber en donde está tenemos que tener en cuenta con qué método se resolvió, supongamos que fue con open addresing lineal => hay que revisar *h(k) + i* con *i = 0, 1, 2, ... , n* hasta encontrarlo. Una vez que lo encontremos, supongamos que esta en *h(k) + 2* no podemos borrarlo y listo, porque si hubiera una clave nueva en *h(k) + 3* nunca la encontraríamos porque cuando vemos que *h(k) + 2* está libre dejamos de buscar.
+
+Una posible solución es agregar un vector de tipo booleano que indique falso si nunca fue ocupado o verdadero si lo fue.
+
+## Funciones de hash perfectas
+
+Son las que no producen colisiones y logran un tiempo de búsqueda óptimo: O(1). Si además la tabla tiene un tamaño *t* y se almacenan *t* datos se dice que es una función de hash perfecta *mínima* (no hay desperdicio de tiempo de búsqueda ni de memoria).
+
+Claramente si las claves son desconocidas no podemos garantizar que no van a producirse colisiones, pero si son claves conocidas de antenamo se puede plantear una función de dispersión sin colisiones.
