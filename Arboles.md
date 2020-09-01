@@ -1,10 +1,8 @@
-# Arboles
-
-## Índice
+# Índice
 
 [TOC]
 
-## Definicion y conceptos
+# Definicion y conceptos
 
 Definición 1: Un árbol es una estructura no lineal en la que cada nodo puede apuntar a uno o varios nodos. Cada nodo tiene un padre y sólo uno (excepto la *raíz*), pero puede tener cero o más hijos.
 
@@ -62,7 +60,7 @@ Algunos conceptos que es necesario entender antes de seguir:
 
 
 
-## Arbol binario
+# Arbol binario
 
 Esta estructura se caracteriza por que cada nodo solo puede tener como máximo 2 hijos.
 
@@ -76,9 +74,9 @@ Se dice que un arból binario es perfecto, cuando está lleno y balanceado
 
 ![Arbol perfecto](https://i.loli.net/2020/06/05/WhEIAi1njwO8TcL.png)
 
-## Busqueda en profundidad
+# Busqueda en profundidad
 
-### Recorrido preorden
+## Recorrido preorden
 
 El recorrido inicia en la Raíz y luego se recorre en pre-orden cada unos de los sub-árboles de izquierda a derecha.
 
@@ -97,7 +95,7 @@ void preorden(NodoArbol* raiz) {
 
 
 
-### Recorrido inorden
+## Recorrido inorden
 
 Se recorre en in-orden el primer sub-árbol, luego se recorre la raíz y al final se recorre en in-orden los demas sub-árboles.
 
@@ -116,7 +114,7 @@ void inorden(NodoArbol* raiz) {
 
 
 
-### Recorrido posorden
+## Recorrido posorden
 
 Se recorre el pos-orden cada uno de los sub-árboles y al final se recorre la raíz.
 
@@ -135,7 +133,7 @@ void postorden(NodoArbol* raiz) {
 
 
 
-## Búsqueda en amplitud
+# Búsqueda en amplitud
 
 Este tipo de recorrido no es recursivo, porque se recorre primero la raíz, luego se recorren los demas nodos ordenados por el nivel al que pertenecen en orden de Izquierda a derecha.
 
@@ -143,11 +141,11 @@ Este tipo de recorrido no es recursivo, porque se recorre primero la raíz, lueg
 
 Para implementarlo se necesita una estructura auxiliar de tipo cola. Primero se encola la raíz, y mientras la cola no esté vacía voy desencolando y tratando los nodos. Si el nodo que estoy procesando tiene un hijo a izquierda, lo encolo, me fijo si tiene un hijo a derecha y lo encolo.
 
-## Arbol Binario de Búsqueda (ABB)
+# Arbol Binario de Búsqueda (ABB)
 
 La característica que diferencia a los ABB de otro tipo de árboles es que siempre los elementos del subárbol izquierdo son menores que la raíz, y los del subárbol derecho mayores.
 
-### Nodo
+## Nodo
 
 ```c++
 template <typename Type>
@@ -262,7 +260,7 @@ bool BSTNode<Type>:: onlyRightChildren() {
 
 ```
 
-### Árbol
+## Árbol
 
 ```c++
 #include "BSTNode.h"
@@ -672,7 +670,7 @@ void BST<Type>:: postOrder(BSTNode<Type>* treeNode) {
 /* ------------------------------------------------------------------------------ */
 ```
 
-## AVL - ABB balanceado por altura
+# AVL - ABB balanceado por altura
 
 Los árboles AVL son un tipo ABB que están balanceados por su altura. Los AVL nos garantizan que para cada nodo, la diferencia entre la altura de sus hijos es **igual o menor a 1.** 
 
@@ -699,7 +697,7 @@ Gráficamente:
 
 ![AVL rotaciones](https://i.loli.net/2020/06/10/FZSqwR2mtb34Hri.png)
 
-### Insertar
+## Insertar
 
 Al insertar un nuevo dato, hay que verificar que el árbol esté balanceado pero no sobre todo el árbol, sólo sobre el camino de inserción. Por ejemplo si tengo el siguiente árbol y quiero agregar el 16
 
@@ -732,7 +730,7 @@ Y finalmente quedaría:
 
 Seguimos analizando el camino de inserción, y vemos que el resto del árbol está balanceado así que no es necesario hacer ninguna otra operación.
 
-### Eliminar
+## Eliminar
 
 Para eliminar hay que hacer lo mismo que para insertar. Una vez que llegamos al nodo a eliminar, nos fijamos cual es el camino, y luego de eliminarlo verificamos recorriendo ese camino si quedó o no balanceado, realizando las operaciones necesarias en el caso de tener que balancear.
 
@@ -748,7 +746,7 @@ Para eliminar hay que hacer lo mismo que para insertar. Una vez que llegamos al 
 
 
 
-## HEAP
+# HEAP
 
 Un heap es un caso específico de los árboles binarios que cumple las siguientes propiedades:
 
@@ -766,7 +764,7 @@ En general los heaps se implementan con un array, donde se guardan los valores p
 
 Podemos ver que la posicion 0 es la raiz, la 1 el hijo izquierdo y la 2 el hijo derecho. Generalizando podemos decir que si el padre está en la posicion *p* => el hijo izq. está en *2 p + 1* y el der. en  *2p + 1*
 
-### Sacar raíz
+## Sacar raíz
 
 1. Se saca la raiz y reemplazandola por la última hoja
 2. Se restaura el heap: se compara el valor de la nueva raíz con el de su hijo menor, y de ser necesario se realiza el intercambio. Luego se sigue comparando hacia abajo el valor trasladado desde la raíz hasta las hojas o hasta ubicar el dato en la posicion definitiva.
@@ -793,7 +791,7 @@ Ahora sí el heap está restaurado.
 
 El costo es de O(log 2 n)
 
-### Agregar
+## Agregar
 
 El nuevo elemento siempre se inserta como la última hoja, y luego se restaura el heap analizando hacia arriba hasta ubicar el nuevo elemento en donde corresponda. Supongamos que al heap anterior quiero agregarle un 9
 
@@ -818,7 +816,7 @@ Ahora sí el heap está restaurado.
 
 El costo es de O(log 2 n)
 
-## Multivia
+# Multivia
 
 Los ABB evolucionan a árboles de búsqueda de múltiples vías. Los nodos tienen a lo sumo m hijos y m-1 claves. Las claves dentro de cada nodo están ordenadas de menor a mayor en espacio contiguos, la forma gráfica de verlos sería algo así:
 
@@ -830,7 +828,7 @@ Y un ejemplo más puntual podría ser así:
 
 
 
-### B
+## B
 
 Los árboles multivías B son un tipo particular de árboles multivía de búsqueda que están balanceados. Para hacer esto, se arman de abajo hacia arriba, y cumplen las siguientes condicines: 
 
@@ -849,40 +847,40 @@ Al insertar los primeros valores, quedaría:
 
 
 
-![image-20200618124556042](../../../upload/image-20200618124556042.png)
+<img src="https://i.loli.net/2020/09/02/Iclka5mD7ONujBy.png" alt="image-20200618124556042" style="zoom:150%;" />
 
 Al agregar el 2, la raiz se divide y bajan los valores a la derecha:
 
-![image-20200618124632678](../../../upload/image-20200618124632678.png)
+<img src="https://i.loli.net/2020/09/02/6JgYWMVpZ2TcnFv.png" alt="image-20200618124632678" style="zoom:150%;" />
 
 Agrego el 33, no pasa nada simplemente se agrega a la derecha del 22:
 
-![image-20200618124724156](../../../upload/image-20200618124724156.png)
+<img src="https://i.loli.net/2020/09/02/9ZHy4CUYTdJ5am2.png" alt="image-20200618124724156" style="zoom:150%;" />
 
 Agrego el 45, sube el 22 y se divide el 10 del 33 y el 45:
 
-![image-20200618124943032](../../../upload/image-20200618124943032.png)
+<img src="https://i.loli.net/2020/09/02/ZLizhmnXBgMGejR.png" alt="image-20200618124943032" style="zoom:150%;" />
 
 Agrego el 5 y el 12, no pasa nada simplemente se agrega a la izquierda del 10 el 5 y a la derecha el 12:
 
-![image-20200618125201804](../../../upload/image-20200618125201804.png)
+<img src="https://i.loli.net/2020/09/02/TugDBQv4nYKrlkH.png" alt="image-20200618125201804" style="zoom:150%;" />
 
 Agrego el 29, no pasa nada, simplemente se agrega a la izquierda del 33:
 
-![image-20200618125252232](../../../upload/image-20200618125252232.png)
+<img src="https://i.loli.net/2020/09/02/Q8CfbXKdpMIBOvP.png" alt="image-20200618125252232" style="zoom:150%;" />
 
 Agrego el 11, sube el 10, queda el 5 separado a la izquierda, y el 11 con el 12:
 
-![image-20200618125408498](../../../upload/image-20200618125408498.png)
+<img src="https://i.loli.net/2020/09/02/nINSsyB2FWxKXAe.png" alt="image-20200618125408498" style="zoom:150%;" />
 
 Ahora supongamos que empiezo a sacar valores. Primero saco el 12 y no pasa nada, queda:
 
-![image-20200618125619559](../../../upload/image-20200618125619559.png)
+<img src="https://i.loli.net/2020/09/02/gyJi9qGUCtKclTV.png" alt="image-20200618125619559" style="zoom:150%;" />
 
 Saco el 2, y baja el 4 al lado del 5:
 
-![image-20200618131200361](../../../upload/image-20200618131200361.png)
+<img src="https://i.loli.net/2020/09/02/7r2IQ5YcTlCmhbn.png" alt="image-20200618131200361" style="zoom:150%;" />
 
 Si ahora saco el 11, baja el 10 y sube el 5:
 
-![image-20200618131247008](../../../upload/image-20200618131247008.png)
+<img src="https://i.loli.net/2020/09/02/j1qpBGbIV2W6Rmr.png" alt="image-20200618131247008" style="zoom:150%;" />
