@@ -282,5 +282,54 @@ Y luego realizar una operación *and* con el array original.
 
 # Hashing 
 
+Algunas definiciones:
 
+* Una ***tabla de hash*** es una estructura de datos que asocia claves con valores que funcionan a modo de direcciones en la misma. Si la cantidad de claves es *n*, el tamaño de la tabla *t* deberá ser aproximadamente 0,8 y esta proporción se llama factor de carga λ => λ = n/t , λ  <= 0,8
+* Una ***funcion de hash*** toma la clave del dato y devuelve un valor, que será el índice de entrada de la tabla. Una buena funcion tiene buena disperción y evitará lo más posible las colisiones entre claves
+* Si k es una clave y p una posicion de la tabla decimos que *h: K -> P / p = h(k)*
+
+Hay que tener en cuenta que si las claves no son números enteros hay que convertirlas. Si fueran letras o palabras podriamos por ejemplo tomar los valores ASCII y sumarlos, por ejemplo:
+
+​		"ab" =  97 x 128 + 98 x 128 = 12416 + 12544 = 24960
+
+## División
+
+Se divide la clave *k* por la cantidad de posiciones de la tabla *t* y se toma el *resto* entonces
+
+​		*p = h(k) = k % t*
+
+Se recomienda que el valor de *t* sea un número primo.
+
+**Ejemplo:**
+
+1. Hay que almacenar 5000 claves 
+2. Calculo el tamaño de tabla *t* => *n = 5000* con λ  = 0,8 tenemos que *t = 5000 / 0,8 = 6250*
+3. El numero primo más cercano a *t* es 6257 => p = k % 6257
+4. Ingreso la clave 113521 en la posicion *p = 113521 % 6257 = **895***
+5. Ingreso la clave 28413 en la posicion *p = 28413 % 6257 = **3385***
+6. Ingreso la clave 44694 en la posicion *p = 113521 % 44694 = **895*** => se produce una colisión. Veremos como solucionar esto más adelante
+
+## Multiplicación
+
+Se multiplica a la clave *k* por un valor *A* tal que *0 < A < 1*, se toma la parte fraccionaria del resultado y se la multiplica por *t* (el tamaño de la tabla). El resultado se redondea y obtenemos la posiciín final
+
+​		*p = h(k) = t · ((k · A) mod 1)*
+
+Logra mejor dispersión que la división
+
+**Ejemplo:**
+
+1. El número de CUIT 23-31562313-7 podemos dividirlo en 4 partes tomando de a 3 dígitos: 233 - 156 - 231 – 37
+2. Sumamos los valores: 233 + 156 + 231 + 37 = **657**
+3. Si el tamaño de la tabla es menor, se aplica la función módulo. Y en el caso de claves de tipo string se puede hacer un corte obteniendo strings más pequeños para realizar un *xor* entre ellos.
+
+## Folding
+
+## Mid-square
+
+## Extraction
+
+## Radix Transformation
+
+## Colisiones
 
