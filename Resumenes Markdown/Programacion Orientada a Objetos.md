@@ -1,22 +1,20 @@
 
 
-# Programación Orientada a Objetos
-
-## Índice
+# Índice
 
 [TOC]
 
-## Que es la POO
+# Que es la POO
 
 La POO es un paradigma de programación que usa objetos en sus interacciones. Es cercano a como expresamos las cosas en la vida real en nuestro día a día. En la POO en lugar de determinar qué funciones necesitamos (como hacíamos en la programación estructurada) se debe determinar qué **objetos** se necesitarán. Los problemas se irán resolviendo de abajo hacia arriba, desde pequeños objetos que actuarán entre sí y conformarán otros más complejos. 
 
 Hay 3 enfoques en la Programación Orientada a Objetos: diseño (TDA), implementación (Clase), usuario (Objeto). En general, se trabaja de manera grupal y hay un grupo para cada uno.
 
-## TDA
+# TDA
 
 El TDA (Tipo de Dato Abstracto) es un concepto matemático, un mecanismo de descripción de alto nivel que al implementarse genera una clase. El TDA es independiente de la implementación y del lenguaje. Vendría a ser un plano del código, y generalmente se hace con un diagrama UML
 
-### UML
+## UML
 
 UML (Lenguaje de Modelado Unificado) es un lenguaje de modelado, **no** de programación. Cuando un código incluye muchas clases debe tener un UML, ya que sirve  como documentación.
 
@@ -32,7 +30,7 @@ Existen 3 modificadores de acceso que indican quienes pueden acceder a un atribu
 
 **Observación:** en general los getters y setters no se incluyen en el diagrama, pero se asume que están en la implementación.
 
-### Clases y métodos abstractos
+## Clases y métodos abstractos
 
 Este tema se verá más adelante, pero básicamente un método abstracto es aquel que se encuentra declarado en la clase pero no implementado, debe tener en su declaración la palabra clave **virtual**.
 
@@ -44,7 +42,7 @@ Hay dos formas de escribir una clase abstracta en UML, una es:
 
 La otra es con 'Persona' en itálica: *Persona*. 
 
-## Clase
+# Clase
 
 La clase es la implementación de un TDA, en este punto sí se piensa un lenguaje, en cómo se va a hacer, etc.
 
@@ -90,14 +88,14 @@ void Persona:: trabajar() {
 }
 ```
 
-### Observaciones
+## Observaciones
 
 - Los atributos son privados, para que no se pueda acceder a ellos desde "afuera"
 - Para instanciar una clase hay que hacer un constructor (sino el lenguaje asigna uno de oficio, que por defecto inicializa todos los atributos en cero)
 - Los **constructores** son métodos especiales que sirven para inicializar un objeto de una determinada clase al mismo tiempo que se declara. Por convención, tienen el mismo nombre que la clase, no retornan nada, no pueden ser heredados y deben ser públicos.
 - Los **destructores** son funciones con el mismo nombre que la clase pero precedidos por un ~. Se utilizan cuando se trabaja con memoria dinámica y **NO** pueden sobrecargarse. **Observación**: los destructores se llaman automáticamente al finalizar la función/método, no los llamamos nosotros
 
-## Objeto
+# Objeto
 
 El objeto es una clase instanciada, por ejemplo si tenemos la clase Persona, podemos instanciar el objeto Valentina
 
@@ -141,7 +139,7 @@ int main() {
  }
 ```
 
-## Sobrecarga de métodos
+# Sobrecarga de métodos
 
 Sobrecargar un método, es tener dos o más métodos con el mismo nombre siempre y cuando **difieran** en
 
@@ -170,7 +168,7 @@ Persona:: Persona (): dni(0), nombre(" ") {}
 
 Personalmente prefiero la segunda si no hay muchos atributos.
 
-## Sobrecarga de operadores
+# Sobrecarga de operadores
 
 La sobrecarga de operadores es similar a la de métodos, pero aplica para los operadores.  Ahora bien, ¿por qué querría sobrecargar un operador? Supongamos que tengo la clase `Fracción` y quiero sumar dos fracciones
 
@@ -232,7 +230,7 @@ Fraccion Fraccion:: operator + (Fraccion otraFraccion) {
 
 De esta manera sí se podría hacer `Fraccion resultado = a + b;` 
 
-### Observaciones
+## Observaciones
 
 - En C++ hay operadores que **NO** se pueden sobrecargar:
   1. Operadores de directivas de procesador #, ##
@@ -247,7 +245,7 @@ De esta manera sí se podría hacer `Fraccion resultado = a + b;`
   - Los operadores **binarios** son aquellos que poseen dos partes (izquierda y derecha), por ejemplo, una operación de suma requiere dos operandos (o1 + o2).
   - Los operadores **unitarios** son aquellos que poseen solo una parte, por ejemplo, una operación de incremento (o1 ++).
 
-## Puntero this
+# Puntero this
 
 Todo objeto se crea con una referencia o puntero a sí mismo, este puntero se llama `this` y se genera de manera automática. Ahora bien, ¿cuándo o por qué se usa? Se *puede* utilizar siempre pero nos veremos ***obligados\*** a utilizarlo cuando el compilador no pueda resolver una ambigüedad en los nombres. 
 
@@ -271,7 +269,7 @@ Persona:: Persona(int dni, string nombre) {
 }
 ```
 
-## Constructor de copia
+# Constructor de copia
 
 El constructor de copia es simplemente un constructor más, que si no es programado, es provisto por el lenguaje (constructor de copia de oﬁcio). ¿Cuándo se llama? Cuando se pasa un objeto por parámetro en alguna función o, como cuando se crea un objeto igualándolo a otro, por ejemplo.
 
@@ -384,19 +382,19 @@ Vector:: Vector(const Vector &vec) {
 }
 ```
 
-## Características principales de la POO
+# Características principales de la POO
 
-### Encapsulamiento
+## Encapsulamiento
 
 Es la propiedad que permite asegurar que la información de un objeto está oculta del mundo exterior. Consiste en agrupar en una Clase los atributos con un acceso privado y los métodos con un acceso público. La forma de acceder o modificar los atributos de una clase es a través de sus métodos.
 
 Ahora bien ¿por qué hay que hacer esto? Porque cuando no hay encapsulamiento los atributos pueden tomar valores inconsistentes, lo que seria fatal para cualquier sistema. El encapsulamiento nos ayuda a proteger la integridad de los datos y nos asegura que los atributos de nuestra clase solo podrán ser accedidos a través de los métodos definidos en dicha clase.
 
-### Ocultamiento de la implementación
+## Ocultamiento de la implementación
 
 Con la ﬁnalidad de proteger al objeto y a su usuario, los datos deberían ser, en general, inaccesibles desde el exterior para que no puedan ser modiﬁcados sin autorización. Para trabajar con ellos se utilizan métodos estipulados para tal fin (en general se los llama getters y setters).
 
-### Herencia
+## Herencia
 
 Nosotros sabemos que un auto es distinto de un colectivo, que a su vez es distinto de un tren, que a su vez es distinto de una moto, etc. Sin embargo, todos comparten algo: son medios de transportes terrestres. Acá es donde aparece la herencia. Voy a tener una **clase padre o superclase** a la que llamaré `TransporteTerrestre`, y otras cuatro **clases hijas o subclases** a las que llamaré `Auto`, `Colectivo`, `Tren` y `Moto`. Las clases hijas van a compartir todas algunos atributos y métodos, que heredarán de la clase `TransporteTerrestre` .
 
@@ -441,7 +439,7 @@ Las formas de heredar son tres:
 - `protected`: lo publico se convierte a protegido
 - `private` (en general no se utiliza): se convierte todo a privado
 
-#### Constructores y herencia
+### Constructores y herencia
 
 A diferencia de lo que ocurre con los métodos y atributos no privados, los constructores **no** se heredan. Cuando existe una relación de herencia entre dos o más clases y se crea un objeto de una clase hija, se ejecuta no sólo ese constructor sino también el de todas las padres de S. Para ello se ejecuta en primer lugar el constructor de la clase que ocupa el nivel más alto en la jerarquía de herencia y se continúa de forma ordenada con el resto de las subclases. 
 
@@ -467,25 +465,25 @@ ClaseB:: ClaseB(int x, int y) : ClaseA(x) {
 }
 ```
 
-### Polimorfismo
+## Polimorfismo
 
 El polimorﬁsmo signiﬁca que un objeto puede tener varias (poli) formas (morfo). Es la propiedad que tienen distintos objetos de comportarse de distinta manera ante un mismo mensaje. Por ejemplo si a un objeto *Persona* le pedimos que se alimente, lo hará de manera distinta a un objeto *Perro*, y a su vez este lo hará de una manera distinta a un objeto *Pájaro*, y así sucesivamente. Por lo tanto el mismo método: *alimentar* trabajaría de forma diferente dependiendo qué objeto lo invoque. Esto puede ser obvio si se sabe cuál es ese objeto, pero la gracia del polimorﬁsmo es no saber qué objeto lo está invocando.
 
 *Nota: faltan cosas*
 
-## Genericidad - TDA, Clase y Objeto
+# Genericidad - TDA, Clase y Objeto
 
-### Introducción
+## Introducción
 
 La genericidad o condición de genérico la aplicaremos en todas las clases contenedoras, como vectores, listas, árboles, etc. Muchas veces veremos estas clases con tipos de datos enteros, como un `int` o `char` para concentrarnos en la estructura de datos y no en lo que guarda, pero la realidad es que en esas estructuras desearemos almacenar tipos diversos de datos. Para intentar entender que es la genericidad vamos a ver el siguiente ejemplo
 
-#### TDA Vector
+### TDA Vector
 
 ![image-20200714174122748](https://i.loli.net/2020/07/15/NSuDc5wiU9sGTBd.png)
 
-#### Clase Vector
+### Clase Vector
 
-##### Vector.h
+#### Vector.h
 
 ```c++
 #ifndef VECTORDINAMICO_VECTOR_H
@@ -564,7 +562,7 @@ class Vector {
 #endif //VECTORDINAMICO_VECTOR_H
 ```
 
-##### Vector.cpp
+#### Vector.cpp
 
 ```c++
 #include "Vector.h"
@@ -634,9 +632,9 @@ void Vector::copiarDatos(TipoDeDato* vec, unsigned inicio, unsigned final) {
 }
 ```
 
-#### Objetos
+### Objetos
 
-##### main.cpp
+#### main.cpp
 
 ```c++
 #include "Vector.h"
@@ -670,7 +668,7 @@ int main() {
 }
 ```
 
-#### Cómo funciona el método redimensionar
+### Cómo funciona el método redimensionar
 
 Primero se fija que el largo al que se vaya a redimensionar sea distinto del tamaño actual del vector (de ser iguales no hace nada).
 
@@ -686,13 +684,13 @@ Finalmente si el vector se agrandó, rellena los nuevos espacios con NULO (si se
 
 *Nota: la variable puntero auxiliar "muere" cuando se termina la función, el que "sobrevive" es el atributo de la clase, datos*
 
-#### Notas
+### Notas
 
 1. Utilizamos un `typedef TipoDeDato` para que se pueda cambiar el tipo de dato del vector por un `char`, un `ﬂoat`, etc. Por ese motivo se trabajó a lo largo de todo el código con `TipoDeDato` en lugar de `int`. Esta es la primera y tibia aproximación a la **genericidad**. 
 2. También debemos deﬁnir una constante NULO ya que el nulo puede variar no solo según el tipo de dato, sino según el tipo de problema con el que se trabaja.
 3. Los métodos anular y copiar están privados porque no nos interesa en que el usuario los emplee. Pero son útiles para modularizar porque otros métodos los pueden utilizar, como el método de redimensionar y el constructor de copia. 
 
-### Plantillas o Templates
+## Templates
 
 En el código anterior se utiliza `typedef Dato` para poder modificar con facilidad el tipo de Dato del vector. Pero ¿qué sucede si necesitamos un vector de `char` y otro de `int`? ¿O si necesitáramos un vector de elementos más complejos, como los datos de un empleado (legajo, nombre, dirección, etc.)? No sería bueno en ningún método copiar o devolver un dato muy grande y complejo.
 
@@ -715,18 +713,18 @@ Vector< string > vecStr2; // Otro vector de strings
 
 En el ejemplo de recién, el compilador ve que necesita un vector para un tipo `char`, por lo que genera automáticamente el código por nosotros. Es decir reemplaza `TipoDeDato` por `char` en todas sus ocurrencias, generando el código completo. Luego, cuando compile la segunda línea, hace lo mismo pero con `string`.
 
-#### Características
+### Características
 
 - Un template no existe hasta que se instancia. Es decir, hasta que no se crea algún objeto indicando el tipo no genera ningún código. 
 - Es indistinto utilizar la palabra `typename` o `class`. Pero se preﬁere la primera ya que el parámetro no tiene por qué ser un objeto sino cualquier tipo.
 
-##### Ventajas
+#### Ventajas
 
 - Generan código de forma automática por nosotros.
 - Hay veriﬁcación de tipos. Esto, es una ventaja porque es una seguridad que el compilador veriﬁque que los tipos sean correctos. 
 - Como la deﬁnición de tipos se resuelve en tiempo de compilación, los ejecutables son más rápidos que los generados utilizando herencia y polimorﬁsmo.
 
-##### Desventajas
+#### Desventajas
 
 - Se debe generar todo el código en el archivo punto h. Por lo tanto no se separarán las declaraciones por un lado (header) y las deﬁniciones por otro (cpp). De todas formas, es recomendable seguir separando las declaraciones de las deﬁniciones, aunque lo incluyamos todo en el mismo archivo.
 - Se necesita indicar el parámetro cada vez que se indique la clase cuando se deﬁnen los métodos.

@@ -1,17 +1,15 @@
-# Recursividad 
+# Índice 
 
 [TOC]
 
 
 
-## Qué es la recursividad
+# Qué es la recursividad
 
 Se dice que una función es recursiva cuando se define en función de si misma. La recursividad puede ser directa o indirecta
 
 * Directa: cuando hay una sentencia explícita en el código de la función llamándose a sí misma
 * Indirecta: cuando el llamado recursivo se realiza a través de otra funcion. Por ejemplo A llama a B y B llama a A
-
-## Ejemplo  de recursividad directa
 
 ### Factorial con iteración
 
@@ -34,7 +32,7 @@ int factorial (int n) {
 }	
 ```
 
-## Funcionamiento de la memoria
+# Funcionamiento de la memoria
 
 Por cada llamado a una función, el programa guarda un registro con los datos locales y el punto de regreso. Cuando se regresa, se libera de la pila los datos pertinentes a la función. 
 
@@ -72,7 +70,7 @@ Lo que está pasando ahí, es que inicialmente la memoria tiene guardadas las va
 
 ![image-20200528135549729](/home/valentina/.config/Typora/typora-user-images/image-20200528135549729.png)
 
-## Stack overflow
+# Stack overflow
 
 Si una función es recursiva, se guardan sus variables y parámetros usando la pila, y la nueva instancia de la función va a trabajar con su propia copia de las variables locales. Cuando la segunda instancia de la función regresa, recupera las variables y los parámetros de la pila y continúa la ejecución en el punto que había sido llamada.
 
@@ -80,9 +78,9 @@ En el ejemplo anterior del factorial, si la función recursiva es llamada con el
 
 Cuando suceda un *stack overflow* la aplicación finalizará por haber consumido toda la memoria disponible, por lo tanto debemos ser cuidadosos al utilizar la recursividad.
 
- ## Recursividad de cola
+ # Recursividad de cola
 
-### Factorial con recursividad de cola
+## Factorial con recursividad de cola
 
 ```c++
 int f (int n, int res) {
@@ -112,7 +110,7 @@ int main() {
 6. En f, como 1 no es igual a 0, devuelve una llamada a f con 1 y 120.
 7. En f, como 0 sí es igual a 0, devuelve 120 a factorial, y factorial a main.
 
-## Recursividad indirecta
+# Recursividad indirecta
 
 Como dijimos antes, la recursividad se clasifica como indirecta cuando por ejemplo una función A hace un llamado a B, y B a A.
 
@@ -161,7 +159,7 @@ Lo que sucede en el ejemplo anterior es lo siguiente:
 5. Como 8 es par, calcular llama a la función sumar.
 6. Etc.
 
-## Recursividad anidada
+# Recursividad anidada
 
 Supongamos que tenemos la siguiente sucesión
 
@@ -179,7 +177,7 @@ int anidada (int n) {
 }
 ```
 
-## Recursividad múltiple
+# Recursividad múltiple
 
 El caso más típico de una recursividad múltiple, es la sucesión de Fibonacci
 
@@ -198,7 +196,7 @@ La sucesión de 5 por ejemplo, se obtiene mediante la suma de las dos sucesiones
 
 El árbol que representa las llamadas a la función se va duplicando en cada nivel hasta llegar a los casos base (0 y 1). Este crecimiento es exponencial, por lo tanto hay que ser cuidadosos al trabajar con recursividad múltiple (a menos que sepamos que los valores son chicos).
 
-### Fibonacci iterativo
+## Fibonacci iterativo
 
 ```c++
 int fibo (int n) {
@@ -215,7 +213,7 @@ int fibo (int n) {
 }
 ```
 
-### Fibonacci recursivo múltiple
+## Fibonacci recursivo múltiple
 
 ```c++
 int fibo (int n) {
@@ -225,7 +223,7 @@ int fibo (int n) {
 }
 ```
 
-### Fibonacci recursivo simple y de cola
+## Fibonacci recursivo simple y de cola
 
 ```c++
 // Función recursiva simple y de cola
@@ -243,7 +241,7 @@ int fibonacci (int n) {
 }
 ```
 
-## Algoritmo divide y vencerás
+# Algoritmo divide y vencerás
 
 Cuando se descompone un problema comlpejo en partes más simples para tratarlas por separado, se está aplicando una resolución de tipo "divide y vencerás". De esta manera se facilita el desarrollo de la solución.
 
@@ -263,7 +261,7 @@ Como se puede inferir, hay una cercanía conceptual entre los algoritmos "divide
 
 Supongamos que quiero hacer una función para calcular la potencia
 
-### Función potencia iterativa
+## Función potencia iterativa
 
 ```c++
 int potencia (int base, int exponente) {
@@ -276,7 +274,7 @@ int potencia (int base, int exponente) {
 
 En este caso, si quiero hacer 2^64, hará sesenta y cuatro ciclos.
 
-### Funcion potencia recursiva
+## Funcion potencia recursiva
 
 ```c++
 int potencia (int base, int exponente) {
@@ -288,7 +286,7 @@ int potencia (int base, int exponente) {
 
 En el caso de la función recursiva, si quiero hacer 2^64, hará 64 llamados a sí misma.
 
-### Funcion potencia con algoritmo divide y vencerás
+## Funcion potencia con algoritmo divide y vencerás
 
 Como se ve en los ejemplos anteriores, no hay mejoría en cuanto a la eficiencia entre la iteración y la recursividad. Para mejorar eso podríamos usar un algoritmo divide y vencerás
 

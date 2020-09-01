@@ -354,7 +354,7 @@ La salida del código anterior es:
 ![Salida lista enlace simple](https://i.loli.net/2020/06/04/QYRfI7BTe3z4l6m.png)
 
 Pilas o Stacks
---------------
+==============
 
 Una pila es una estructura de datos de tipo LIFO, en la cual los elementos almacenados en la misma se agregan y se sacan del tope de la pila. De esta manera el último elemento en ser insertado es el primero en salir.
 
@@ -368,7 +368,7 @@ La implementación dinámica utiliza nodos enlazados a través de punteros. El n
 
 ![Pilas con nodos](https://i.loli.net/2020/06/04/XnsHBzOGWQdvjmq.png)
 
-### TDA
+## TDA
 
 ```mermaid
 classDiagram
@@ -385,7 +385,7 @@ class Pila {
 }
 ```
 
-### Clase
+## Clase
 
 ```c++
 // Pila.h
@@ -442,7 +442,7 @@ int Pila:: obtenerCantidadElementos() {
 }
 ```
 Colas o Queues
---------------
+==============
 
 Una cola es una estructura de datos de tipo FIFO, en el cual los elementos almacenados en la misma se agregan al final, pero se sacan al principio. De esta manera, el primer elemento en ser agregado es el primero en salir.
 
@@ -452,7 +452,7 @@ La implementación dinámica de una cola es similar a la de una pila, también s
 
 ![Cola con nodos](https://i.loli.net/2020/06/04/AYcOx6CMJITF15g.png)
 
-### TDA
+## TDA
 
 ```mermaid
 classDiagram
@@ -471,7 +471,7 @@ class Cola {
 }
 ```
 
-### Clase
+## Clase
 
 ```c++
 // Cola.h
@@ -537,7 +537,7 @@ int Cola:: obtenerElementos() {
 
 
 Listas Doblemente Enlazadas
----------------------------
+===========================
 
 El problema que pueden presentar las listas de enlace simple, es que solo se pueden recorrer en un sentido. Para acceder a un nodo anterior, habría que recorrer toda la lista. Las listas con enlace doble logran resolver eso agregando a la clase Nodo un puntero al nodo anterior.
 
@@ -546,15 +546,13 @@ Implementaciones de este tipo tienen sentido cuando hay que estar accediendo fre
 *Falta*
 
 Listas Circulares
------------------
+=================
 
 En las listas circulares, el ultimo nodo apunta al primero. Esto es útil cuando se quieren procesar datos que se reciben de manera continua.
 
 *Falta*
 
-
-
-## Templates
+# Templates
 
 Hasta ahora veníamos utilizando `typedef` al comienzo de los .h para indicar de que tipo queríamos que fuera nuestra estructura. Pero ¿qué pasa si quiero tener por ejemplo dos listas al mismo tiempo? Una para enteros, y otra para strings. 
 
@@ -568,23 +566,6 @@ Lista<string> listaStrings;
 ```
 
 ¿Cómo funciona esto? En la primera linea el compilador ve que necesita una Lista para un tipo *int*, entonces genera automáticamente el código por nosotros. Reemplaza *Dato* por *int* en todas las apariciones generando así el código completo. En la segunda linea hace lo mismo, pero reemplazando *Dato* por *string*.
-
-### Cosas a tener en cuenta
-
-* El template no existe hasta que se instancia, antes de eso no genera ningún código
-* Como consecuencia de lo anterior, todo el código debe estar en un .h (si bien no hay division en .h y .cpp es recomendable seguir separando declaraciones de definiciones)
-* Es indistinto utilizar la palabra *typename* o *class*
-
-### Ventajas
-
-* Generan código de forma automática por nosotros
-* Hay una verificación de tipos, en una lista de enteros no se puede agregar strins (y viceversa)
-* Los ejecutables son más rápidos que los generados utilizando herencia y polimorfismo porque se resuelve la definición de tipos en tiempo de compilación
-
-### Desventajas
-
-* Se necesita indicar el parámetro cada vez que se indique la clase cuando se definen los métodos
-* No hay constante NULO, porque va a ser distinto para cada tipo de dato
 
 ### Ejemplo de Lista Simplemente Enlazada
 
