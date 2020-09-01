@@ -219,10 +219,18 @@ void intercambiar(double &a, double &b) {
 
 ### Shellsort
 
-Mejora del ordenamiento por inserción (básico). En este caso se comparan elementos separados por varias posiciones y en varias pasadas de saltos cada vez menores se va ordenando el vector. El costo es de **O(n · (log 2 n)²)** 
+Mejora del ordenamiento por inserción (básico). En este caso se comparan elementos separados por varias posiciones y en cada iteración da saltos cada vez menores se va ordenando el vector.
 
 ```c++
-
+void shellsort(double vector[], int elementos) {
+    for (int salto = elementos / 2; salto > 0; salto /= 2) {
+        for (int i = salto; i < elementos; i++) {
+        	for (int j = i; j >= salto; j -= salto)
+                if (vector[j] < vector[j - salto])
+                    intercambiar(vector[j], vector[j - salto]);
+        }
+    }
+}
 ```
 
 # Trie
