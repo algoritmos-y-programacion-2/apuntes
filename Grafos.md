@@ -113,5 +113,67 @@ Breadth first search o "búsqueda primero en anchura" consiste visitar todos los
 
 ![Grafos BFS](https://i.loli.net/2020/07/28/3iHSvBK9xsf5j7o.png)
 
-# Estructuras asociadas
+# Recorridos mínimos
+
+## Dijkstra
+
+Este algoritmo nos permite determinar la ruta con menor peso desde un origen hasta todos los vértices del grafo.
+
+Supongamos el siguiente grafo
+
+![image-20200901140521803](https://i.loli.net/2020/09/02/fIc5lW4zRbXwAha.png)
+
+Vamos a tener que armar dos vectores, uno de tipo booleano y otro de tipo entero, que se van a inicializar así
+
+![image-20200901140606707](https://i.loli.net/2020/09/02/TNlS5Jo3Pq1Ipsb.png)
+
+Y nos van a servir para poder ir comparando los pesos nuevos que vamos encontrando y para no hacer el mismo recorrido dos veces. La idea a medida que vamos recorriendo el grafo es ver si el nuevo valor para llegar a X es menor que el que esta guardado en nuestro vector, y en ese caso modificarlo.
+
+Luego de inicializar los vectores empezamos a iterar
+
+<img src="https://i.loli.net/2020/09/02/gSrQ9VX5u8sMHD6.png" alt="image-20200901140812765" style="zoom:150%;" />
+
+<img src="https://i.loli.net/2020/09/02/dsMl3DANyqhHiTW.png" alt="image-20200901140850348" style="zoom:150%;" />
+
+Finalmente nos queda
+
+![image-20200901140942159](https://i.loli.net/2020/09/02/dH6ih5BxI1TCWSf.png)
+
+Entonces si queremos saber el menor costo desde 0 hasta 4 por ejemplo solo resta acceder a esa posicion del vector, y nos da 30.
+
+```c++
+int* dijkstra (int origen, int** grafo, int elementos) {
+    int distancias[elementos];
+    bool visitados[elementos];
+
+    for (unsigned i = 0; i < elementos; i++) {
+        if (distancias[i] != origen)
+            distancias[i] = INFINITO;
+        visitados[i] = false;
+    }
+
+    for (unsigned i = 0; i < elementos - 1; i++) {
+        int minPos = distanciaMinima(distancias, visitados);
+        visitados[minPos] = true;
+        for (unsigned j = 0; j < elementos; j++){
+            int minDist = distancia[minPos] + grafo[min][j];
+            if (!visitados[j] && distancia[min] != INFINITO && min < distancia[j])
+                distancia[j] = minDist;
+        }
+    }
+    return distancias;
+}
+
+int distanciaMinima(int distancias[], bool visitados[]) {
+    int min = INFINITO;
+    int indiceMin = 0;
+    for (int i = 0; i < elementos; i++) {
+        if (!visitados[i] && distancias[i] <= min) {
+            min = distancias[i];
+            indiceMin = i;
+        }
+    }
+    return indiceMin;
+}
+```
 
