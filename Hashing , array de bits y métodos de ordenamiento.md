@@ -233,35 +233,6 @@ void shellsort(double vector[], int elementos) {
 }
 ```
 
-# Trie
-
-Es una estructura de datos que almacena un conjunto de claves de tipo string. Si bien hay muchas formas distintas de plasmarlo, la que vamos a ver es con un árbol donde cada nodo representa un carácter de una palabra insertada en el trie y los nodos hijos son caracteres que aparecen después de él en la palabra.
-
-Cosas importantes a tener en cuenta: 
-
-- La raíz es en general el caractér vacío, podemos considerar que éste aparece al inicio de cualquier palabra
-- Si el alfabeto tiene k símbolos cada nodo del trie tiene k+1 punteros (el extra es por si guarda una palabra)
-
-
-
-En este caso el alfabeto tiene 3 letras: a, b y c. Las claves formadas son: aa, ab, aba, abc, abba, abaca, ac, b, ba, baa, bab, baba, bac, c, ca, caaba, cab y caba. 
-
-![image-20200831180554817](https://i.loli.net/2020/09/01/xHa4AcVEn6sKOyR.png)
-
-En este caso se simplificó el diagrama porque hay un total de 11 símbolos, pero la estructura de los nodos es similar. Las claves son: algo, ala, abeja  trie, trineo y tres.
-
-![image-20200831184412453](https://i.loli.net/2020/09/01/SqUzrxhM4WL7bjX.png)
-
-La desventaja que tienen estas estructuras es el costo espacial, porque hay muchos nodos con punteros a vacío, como se ve en la primera imagen. Sin embargo algunas de las ventajas son: nos permite imprimir todas las palabras en orden alfabético fácilmente y optimiza el tiempo de búsqueda de una clave, que en el peor caso si la clave es de longitud n el costo será de O(n).
-
-## Ternary Search Trie
-
-El objetivo es reducir la cantidad de memoria que utiliza un trie, para eso cada nodo tiene hasta 3 punteros y un símbolo. El símbolo o la cadena que representa la raíz es común para todas las siguientes cadenas.  El costo en el peor caso si la clave es de longitud n el costo será de O(n)
-
-![image-20200831194038514](https://i.loli.net/2020/09/01/dHckmQNE5sq7vSf.png)
-
-Este TST tiene las palabras: abeja, abajo, ala, alga, algas, algo, aloe, avispa, avion y ave
-
 # Array de bits
 
 Un array de bits es un arreglo consecutivo de memoria donde se almacenan bits. Se utilizan para indicar si un elemento está o no en un conjunto pero ¿de qué manera? Bueno cada elemento se corresponde con el subíndice del array y lo que se guarda en cada posición es un 0 o un 1 (por convención 1 es que está y 0 que no está).

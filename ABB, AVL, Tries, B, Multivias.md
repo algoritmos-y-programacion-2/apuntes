@@ -884,3 +884,34 @@ Saco el 2, y baja el 4 al lado del 5:
 Si ahora saco el 11, baja el 10 y sube el 5:
 
 <img src="https://i.loli.net/2020/09/02/j1qpBGbIV2W6Rmr.png" alt="image-20200618131247008" style="zoom:150%;" />
+
+# Trie
+
+Es una estructura de datos que almacena un conjunto de claves de tipo string. Si bien hay muchas formas distintas de plasmarlo, la que vamos a ver es con un árbol donde cada nodo representa un carácter de una palabra insertada en el trie y los nodos hijos son caracteres que aparecen después de él en la palabra.
+
+Cosas importantes a tener en cuenta: 
+
+- La raíz es en general el caractér vacío, podemos considerar que éste aparece al inicio de cualquier palabra
+- Si el alfabeto tiene k símbolos cada nodo del trie tiene k+1 punteros (el extra es por si guarda una palabra)
+
+
+
+En este caso el alfabeto tiene 3 letras: a, b y c. Las claves formadas son: aa, ab, aba, abc, abba, abaca, ac, b, ba, baa, bab, baba, bac, c, ca, caaba, cab y caba. 
+
+![image-20200831180554817](https://i.loli.net/2020/09/01/xHa4AcVEn6sKOyR.png)
+
+En este caso se simplificó el diagrama porque hay un total de 11 símbolos, pero la estructura de los nodos es similar. Las claves son: algo, ala, abeja  trie, trineo y tres.
+
+![image-20200831184412453](https://i.loli.net/2020/09/01/SqUzrxhM4WL7bjX.png)
+
+La desventaja que tienen estas estructuras es el costo espacial, porque hay muchos nodos con punteros a vacío, como se ve en la primera imagen. Sin embargo algunas de las ventajas son: nos permite imprimir todas las palabras en orden alfabético fácilmente y optimiza el tiempo de búsqueda de una clave, que en el peor caso si la clave es de longitud n el costo será de O(n).
+
+## Ternary Search Trie
+
+El objetivo es reducir la cantidad de memoria que utiliza un trie, para eso cada nodo tiene hasta 3 punteros y un símbolo. El símbolo o la cadena que representa la raíz es común para todas las siguientes cadenas.  El costo en el peor caso si la clave es de longitud n el costo será de O(n)
+
+![image-20200831194038514](https://i.loli.net/2020/09/01/dHckmQNE5sq7vSf.png)
+
+Este TST tiene las palabras: abeja, abajo, ala, alga, algas, algo, aloe, avispa, avion y ave
+
+# 
