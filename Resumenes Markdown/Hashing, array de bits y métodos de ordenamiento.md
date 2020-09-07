@@ -271,6 +271,24 @@ Hay que tener en cuenta que si las claves no son números enteros hay que conver
 
 ​		"ab" =  97 x 128 + 98 x 128 = 12416 + 12544 = 24960
 
+Ahora bien ¿que aplicación le podemos dar a esto? ¿para qué nos sirve? Supongamos que queremos guardar los numeros de CUIL de un grupo de personas. Lo más eficiente para buscar o eliminar un dato sería que cada número de CUIL se guarde en la posicion del vector que se corresponda, de esta manera si queremos eliminar el número 20234807189 debería acceder a la posición 20234807189 del vector y asignarle un valor nulo. El problema que conlleva esto es el costo espacial, porque si solo necesitamos guardar *algunos* vamos a tener un vector de 44.500.000.000 posiciones lleno de nulos.
+
+Entonces ¿qué podemos hacer? Aplicar una función de hashing que nos convierta ese 20234807189 en un número más chico, y guardar ahí el CUIL. Supongamos que aplicamos la función de extracción (que se explicará más adelante) y tomamos los últimos 2 números. Con esto nos quedaría el número 20234807189 guardado en la posición 89 en vez de en la 20234807189.
+
+![image-20200907204419894](https://i.loli.net/2020/09/08/PYhXOvfqmBpC5tT.png)
+
+¿Qué pasa si ahora quiero agregar el CUIL 27424715289? Si vuelvo a tomar los últimos 2 números me queda de nuevo el 89, pero no lo puedo guardar ahí porque ya guardé el anterior! Esto se llama colisión y más adelante vamos a ver bien las distintas formas de tratarlas. 
+
+![image-20200907204436070](https://i.loli.net/2020/09/08/v5WBR1aowkHUmPS.png)
+
+Ahora lo primero que podríamos pensar es "bueno si la 89 está ocupada, lo ponemos en la 90 y listo"
+
+![image-20200907204501396](https://i.loli.net/2020/09/08/AWYJNDRmBZkisFh.png)
+
+Esta resolución es de direccionamiento abierto lineal, y si bien funciona hay opciones mejores.
+
+Otra opción es buscar otra función para obtener la clave y en vez de usar la extracción usar la radix-transformation o el folding, pero la realidad es que no podríamos garantizar que no van a producirse colisiones. Quizás no pase con estos dos valores, pero probablemente pase con otros.
+
 ## Funciones
 
 ### División / Módulo
@@ -316,7 +334,7 @@ Se eleva a la clave *k* al cuadrado y se toman los dígitos centrales
 
 ### Extraction
 
-Se extrae una parte de la clave. Hay que ser cuidadosos con los dígitos a extraer porque si son por ejemplo números de CUIT/CUIL y se toman los primeros 4 los valores siempre empiezan con 20, 23, 24 y 27 y pueden producirse muchas colisiones.
+Se extrae una parte de la clave. Hay que ser cuidadosos con los dígitos a extraer porque si son por ejemplo números de CUIT/CUIL y se toman los primeros 4 los valores siempre empiezan con 20, 23, 24 y 27 pueden producirse muchas colisiones.
 
 ### Radix Transformation
 
