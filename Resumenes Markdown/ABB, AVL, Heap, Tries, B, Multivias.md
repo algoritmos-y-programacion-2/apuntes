@@ -834,7 +834,7 @@ Los árboles multivías B son un tipo particular de árboles multivía de búsqu
 
 * Todos los nodos excepto la raíz están completos con claves al menos hasta la mitad
 * La raiz es hoja o tiene al menos dos hijos
-* Si el nodo un nodo tiene n claves, tiene n+1 hijos
+* Si el nodo tiene n claves, tiene n+1 hijos
 * Todas las hojas están en el mismo nivel
 
 El grado del árbol lo determina el programador, lo recomendable es 5 por ser el más eficiente.

@@ -267,7 +267,7 @@ Algunas definiciones:
 * Una ***funcion de hash*** toma la clave del dato y devuelve un valor, que será el índice de entrada de la tabla. Una buena funcion tiene buena disperción y evitará lo más posible las colisiones entre claves
 * Si k es una clave y p una posicion de la tabla decimos que *h: K -> P / p = h(k)*
 
-Hay que tener en cuenta que si las claves no son números enteros hay que convertirlas. Si fueran letras o palabras podriamos por ejemplo tomar los valores ASCII y sumarlos, por ejemplo:
+Hay que tener en cuenta que si las claves no son números enteros hay que convertirlas. Si fueran letras o palabras podriamos por ejemplo tomar los valores ASCII y sumarlos. Un ejemplo podría ser:
 
 ​		"ab" =  97 x 128 + 98 x 128 = 12416 + 12544 = 24960
 
