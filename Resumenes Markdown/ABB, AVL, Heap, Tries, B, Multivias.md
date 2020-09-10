@@ -704,13 +704,13 @@ Al insertar un nuevo dato, hay que verificar que el árbol esté balanceado pero
 ***Nota: hay dos errores en las imágenes:***
 
 **1. *El FE del 7 debería decir -1 arriba, no 1***
-**2. *El FE de 12 debería decir -3 a la izquierda y 0 arriba**
+**2. El FE de 12 debería decir -3 a la izquierda y 0 arriba**
 
 ![Insertar 1](https://i.loli.net/2020/06/10/Va2y81g9dRoujcD.png)
 
 Quedaría en la siguiente posición, y lo que hay que verificar si quedó o no balanceado es el camino verde.
 
-![Insertar 2](Imagenes%20de%20los%20apuntes/Ejemplo insertar 2.png)
+![Insertar 2](https://i.loli.net/2020/09/08/5Bd4tAueqOovVQ9.png)
 
 Chequeando nuevamente vemos que 16 está balanceado, 18 está balanceado, pero 19 no. 
 
@@ -718,11 +718,11 @@ Chequeando nuevamente vemos que 16 está balanceado, 18 está balanceado, pero 1
 
 El 19 fue el nodo que rompio con la invariante del AVL, le pondremos el nombre Z, y luego siguiendo el camino de insercón le pondremos Y y X a los que siguen.
 
-![Insertar 4](Imagenes%20de%20los%20apuntes/Ejemplo insertar 4.png)
+![Insertar 4](https://i.loli.net/2020/09/08/dO2s8w9WZrtebjE.png)
 
 Lo que hay que analizar ahora, es qué rotación tendremos que hacer:
 
-![Insertar 5](https://i.loli.net/2020/06/10/uiPS1kZhBpN7vs5.png)
+![Insertar 5](https://i.loli.net/2020/09/08/BUSyp3qJrRxmNKW.png)
 
 Y finalmente quedaría:
 
@@ -894,8 +894,6 @@ Cosas importantes a tener en cuenta:
 - La raíz es en general el caractér vacío, podemos considerar que éste aparece al inicio de cualquier palabra
 - Si el alfabeto tiene k símbolos cada nodo del trie tiene k+1 punteros (el extra es por si guarda una palabra)
 
-
-
 En este caso el alfabeto tiene 3 letras: a, b y c. Las claves formadas son: aa, ab, aba, abc, abba, abaca, ac, b, ba, baa, bab, baba, bac, c, ca, caaba, cab y caba. 
 
 ![image-20200831180554817](https://i.loli.net/2020/09/01/xHa4AcVEn6sKOyR.png)
@@ -908,10 +906,9 @@ La desventaja que tienen estas estructuras es el costo espacial, porque hay much
 
 ## Ternary Search Trie
 
-El objetivo es reducir la cantidad de memoria que utiliza un trie, para eso cada nodo tiene hasta 3 punteros y un símbolo. El símbolo o la cadena que representa la raíz es común para todas las siguientes cadenas.  El costo en el peor caso si la clave es de longitud n el costo será de O(n)
+El objetivo es reducir la cantidad de memoria que utiliza un trie, para eso cada nodo tiene hasta 3 punteros y un símbolo. El símbolo o la cadena que representa la raíz es común para todas las siguientes cadenas.  El costo en el peor caso si la clave es de longitud n será de O(n)
 
 ![image-20200831194038514](https://i.loli.net/2020/09/01/dHckmQNE5sq7vSf.png)
 
 Este TST tiene las palabras: abeja, abajo, ala, alga, algas, algo, aloe, avispa, avion y ave
 
-# 

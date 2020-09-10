@@ -56,11 +56,11 @@ int vector[] = {11, 32, 1, 26, 17, 4};
 int aux, elementos = 6;
 for(int i = 0; i < elementos; i++) {
 	for(int j = 0; j < elementos - i; j++) {
-	if(vector[j] > vector[j + 1]){
-		aux = vector[j];
-		vector[j]=vector[j + 1];
-		vector[j + 1]=aux;
-		}
+	    if(vector[j] > vector[j + 1]) {
+		    aux = vector[j];
+			vector[j]=vector[j + 1];
+			vector[j + 1]=aux;
+	    }
 	}
 }
 ```
@@ -257,8 +257,6 @@ Para **eliminar** el número 2 tendría que crear una máscara así:
 
 Y luego realizar una operación *and* con el array original. 
 
-
-
 # Hashing 
 
 Algunas definiciones:
@@ -291,7 +289,7 @@ Otra opción es buscar otra función para obtener la clave y en vez de usar la e
 
 ## Funciones
 
-### División / Módulo
+### División
 
 Es una de las funciones de dispersión más simple: se divide la clave *k* por la cantidad de posiciones de la tabla *t* y se toma el *resto* entonces
 
@@ -308,7 +306,7 @@ Se recomienda que el valor de *t* sea un número primo.
 5. Ingreso la clave 28413 en la posicion *p = 28413 % 6257 = **3385***
 6. Ingreso la clave 44694 en la posicion *p = 113521 % 44694 = **895*** => se produce una colisión. Veremos como solucionar esto más adelante
 
-### Folding / Multiplicación
+### Multiplicación
 
 Se multiplica a la clave *k* por un valor *A* tal que *0 < A < 1*, se toma la parte fraccionaria del resultado y se la multiplica por *t* (el tamaño de la tabla). El resultado se redondea y obtenemos la posición final
 
@@ -316,11 +314,16 @@ Se multiplica a la clave *k* por un valor *A* tal que *0 < A < 1*, se toma la pa
 
 Logra mejor dispersión que la división
 
+### Folding
+
+Se toma la cantidad de dígitos que tiene el tamaño de la tabla, y se divide la clave de manera tal que cada parte tenga esa cantidad de dígitos (o menos), y luego se suma cada una de esas partes.
+
 **Ejemplo:**
 
-1. El número de CUIT 23-31562313-7 podemos dividirlo en 4 partes tomando de a 3 dígitos: 233 - 156 - 231 – 37
-2. Sumamos los valores: 233 + 156 + 231 + 37 = **657**
-3. Si el tamaño de la tabla es menor, se aplica la función división
+1. El tamaño de la tabla es 789 => nos quedamos con que tiene 3 dígitos
+2. El número de CUIT 23-31562313-7 podemos dividirlo en 4 partes tomando de a 3 dígitos nos quedaría: 233 - 156 - 231 – 37
+3. Sumamos los valores: 233 + 156 + 231 + 37 = **657**
+4. Si el tamaño de la tabla fuera menor, aplicamos la función división
 
 ### Mid-square
 

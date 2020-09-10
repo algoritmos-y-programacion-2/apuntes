@@ -1,5 +1,3 @@
-
-
 # Índice
 
 [TOC]
@@ -341,12 +339,12 @@ Este principio indica que dos ejecuciones distintas del mismo algoritmo solo dif
 
 Tomamos los tiempos en segundos, mostramos los resultados en la tabla:
 
-|   -    |    n     |  Tm1  |  Tm2  |
-| :----: | :------: | :---: | :---: |
-|  C++   |  10 mil  | 0.467 | 0.87  |
-|  C++   | 1000 mil | 40.34 | 75.15 |
-| Python |  10 mil  | 16.24 | 31.2  |
-| Python | 100 mil  | 1211  | 2325  |
+| Lenguaje |    n     |  Tm1  |  Tm2  |
+| :------: | :------: | :---: | :---: |
+|   C++    |  10 mil  | 0.467 | 0.87  |
+|   C++    | 1000 mil | 40.34 | 75.15 |
+|  Python  |  10 mil  | 16.24 | 31.2  |
+|  Python  | 100 mil  | 1211  | 2325  |
 
 Analizando sólo la máquina uno, podemos observar que entre C++ y Python hay una proporción de 34 para *n = 10.000* y de 30 para *n = 100.000*, por lo tanto podemos suponer que el valor de *c* sería aproximadamente 30 para una misma máquina pero diferente lenguaje.
 
@@ -372,7 +370,7 @@ Para un mismo algoritmo, y un mismo tamaño de problema, hay tres situaciones re
 
 En el cálculo de la complejidad temporal, hay operaciones a las cuales se les asigna una duración de una unidad de tiempo. Estas operaciones las llamamos operaciones elementales (OE). 
 
-*Nota: si bien un tipo de operación elemental no tiene por qué tener la misma duración que otrapodemos acotar ese tiempo por una constante.*
+*Nota: si bien un tipo de operación elemental no tiene por qué tener la misma duración que otra podemos acotar ese tiempo por una constante.*
 
 Tomaremos como OE a:
 
@@ -406,7 +404,7 @@ else
     b = 1;			// 1 OE
 ```
 
-En este caso, a partir de la liena 3 la cantidad de OE dependerá del valor que ingresó el usuario, y acá es donde hablamos del mejor y el peor caso.
+En este caso, a partir de la linea 3 la cantidad de OE dependerá del valor que ingresó el usuario, y acá es donde hablamos del mejor y el peor caso.
 
 * Mejor caso: T(n) = 1 + 1 + 1 + 1 = 4
 * Peor caso: T(n) = 1 + 1 + 1 + 2 + 2 = 7
@@ -436,12 +434,12 @@ int busqueda (int[] vec, int n, int dato) {  // 2 OE
     
     while ((pos < n) && (!esta)) {			 // 3 OE
        
-        if (vec[pos] == dato)			     // 2 OE -> Mejor caso, estaba en la primera 											  //	posicion
+        if (vec[pos] == dato)			     // 2 OE -> Mejor caso, estaba en la primera 											                 //	posicion
             esta = true;					 // 1 OE.
-        									 // Despues de esto vuelve al while, a ver si 											   // se sigue cumpliendo (+3 OE) y como no 												 // cumple (analizando el mejor caso) sale
+        									 // Despues de esto vuelve al while, a ver si 											                 // se sigue cumpliendo (+3 OE) y como no 												                 // cumple (analizando el mejor caso) sale
        
         else
-            pos++;                           // 2 OE -> Peor caso: no estaba -> hace   									             // todo lo anterior 7 veces por cada n 
+            pos++;                           // 2 OE -> Peor caso: no estaba -> hace   									                             // todo lo anterior 7 veces por cada n 
     }
     
     if (esta)								 // 1 OE
@@ -492,8 +490,8 @@ O(1)  ⊂ O( log(n) ) ⊂ O(2) ⊂ ... ⊂ O(n) ⊂ O(n * log(n) ) ⊂ O(n²) �
 Cuando un algoritmo es largo y tiene varios bloques puede ser dificultoso calcular el orden. Pero utilizando las propiedades que listamos a continuación podremos dividir la tarea y utilizar cálculos ya realizados.
 
 1. Identidad: f es O(f )
-2. Inclusión: Si O(f ) es O(g) ⇒ O(f ) ⊆ O(g)
-3. Doble inclusión: O(f ) = O(g) ⇐⇒ f es O(g) y g es O(f )
+2. Inclusión: Si O(f ) es O(g) ⇒ O(f) ⊆ O(g)
+3. Doble inclusión: O(f ) = O(g) ⇐⇒ f es O(g) y g es O(f)
 4. Transitiva: Si f es O(g) y g es O(h) ⇒ f es O(h)
 5. Cota mínima: Si f es O(g) y f es O(h) ⇒ f es O(min {g, h})
 6. Suma: Si f es O(h) y g es O(i) ⇒ f + g es O(max {h, i})
@@ -578,7 +576,7 @@ En general se utiliza la cota inferior con el mejor caso.
 
 ​								*0 ≤ c ∗ g(n) ≤ f (n)* 
 
-para todo x > n0 y para todo n ≥ k (los valores de *c* y *n0* no dependen de *n*, sino de f )
+para todo n > n0 y para todo n ≥ k (los valores de *c* y *n0* no dependen de *n*, sino de f )
 
 Se debe observar que f (n) es Ω(g(n)) sii g(n) es O(f (n)). En textos en inglés, suele decirse que la función f es ‘lowly bounded’ por g.
 
