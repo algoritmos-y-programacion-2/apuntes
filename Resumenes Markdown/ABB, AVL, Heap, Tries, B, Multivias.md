@@ -110,6 +110,7 @@ void inorden(NodoArbol* raiz) {
         preorden(raiz->obtenerHijoDerecha());
     }
 }
+
 ```
 
 
@@ -746,7 +747,7 @@ Para eliminar hay que hacer lo mismo que para insertar. Una vez que llegamos al 
 
 
 
-# HEAP
+# Heap
 
 Un heap es un caso específico de los árboles binarios que cumple las siguientes propiedades:
 

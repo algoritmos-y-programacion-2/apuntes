@@ -169,7 +169,7 @@ int dividirVector(double vector[], int primero, int ultimo) {
 }
 
 void intercambiar(double &a, double &b) {
-    int aux = a;
+    double aux = a;
     a = b;
     b = aux;
 }
@@ -211,7 +211,7 @@ void armarHeap(double vector[], int elementos, int posRaiz) {
 }
 
 void intercambiar(double &a, double &b) {
-    int aux = a;
+    double aux = a;
     a = b;
     b = aux;
 }
